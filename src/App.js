@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import Todo from "./views/Todo";
 import Covid from "./views/Covid";
 import { CountDown, NewCountDown } from "./views/Countdown";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 const App = () => {
   let [name, setname] = useState("Trung Anh");
   const [address, setAddress] = useState("");
@@ -44,21 +47,23 @@ const App = () => {
   };
 
   const onTimeup = () => {
-   alert("Time up");
+    //  alert("Time up");
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <CountDown onTimeup={onTimeup} />
-        <span>-----------</span>
-        <NewCountDown onTimeup={onTimeup}/>
-        <h2>Hello React with {name} !</h2>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
 
-        <Covid />
-        {/* <Todo
+          {/* <CountDown onTimeup={onTimeup} />
+          <span>-----------</span>
+          <NewCountDown onTimeup={onTimeup} />
+          <h2>Hello React with {name} !</h2>
+
+          <Covid /> */}
+          {/* <Todo
           todos={todos}
           title={"All Todos"}
           deleteDataTodo={deleteDataTodo}
@@ -77,8 +82,39 @@ const App = () => {
         <button type="button" onClick={(event) => handleEventclick(event)}>
           Click Me!
         </button> */}
-      </header>
-    </div>
+        </header>
+        <div>
+          <Switch>
+            <Route path="/" exact>
+              <Covid />
+            </Route>
+            <Route path="/timer">
+              <CountDown onTimeup={onTimeup} />
+              <span>-----------</span>
+              <NewCountDown onTimeup={onTimeup} />
+            </Route>
+            <Route path="/todo">
+              <Todo
+                todos={todos}
+                title={"All Todos"}
+                deleteDataTodo={deleteDataTodo}
+              />
+              <input
+                type="text"
+                value={address}
+                onChange={(event) => handleOnChaneInput(event)}
+              />
+              <button
+                type="button"
+                onClick={(event) => handleEventclick(event)}
+              >
+                Click Me!
+              </button>
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 };
 

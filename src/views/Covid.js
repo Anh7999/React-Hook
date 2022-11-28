@@ -17,7 +17,7 @@ const Covid = () => {
   );
   // "https://api.covid19api.com/country/vietnam?from=2020-03-01T00:00:00Z&to=2022-04-01T00:00:00Z"
   return (
-    <>
+    <div >
       <h3>Covid19 Viet Nam</h3>
       <table id="customers">
         {/* {console.log(">> check data covid: ", dataCovid)} */}
@@ -63,7 +63,7 @@ const Covid = () => {
           )}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 export default Covid;
