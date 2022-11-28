@@ -1,8 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./views/Nav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Todo from "./views/Todo";
+import Covid from "./views/Covid";
+import { CountDown, NewCountDown } from "./views/Countdown";
 const App = () => {
   let [name, setname] = useState("Trung Anh");
   const [address, setAddress] = useState("");
@@ -13,9 +15,11 @@ const App = () => {
     { id: "todo4", title: "fix bugs 2", type: "ta 2" },
   ]);
 
+  useEffect(() => {
+    console.log("use useeffect");
+  }, [address]);
+
   const handleEventclick = (event) => {
-    // setname(address);
-    // console.log("Click me", name);
     if (!address) {
       alert("emtry");
       return;
@@ -39,13 +43,22 @@ const App = () => {
     setTodos(currenttodos);
   };
 
+  const onTimeup = () => {
+   alert("Time up");
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
+        <CountDown onTimeup={onTimeup} />
+        <span>-----------</span>
+        <NewCountDown onTimeup={onTimeup}/>
         <h2>Hello React with {name} !</h2>
-        <Todo
+
+        <Covid />
+        {/* <Todo
           todos={todos}
           title={"All Todos"}
           deleteDataTodo={deleteDataTodo}
@@ -63,7 +76,7 @@ const App = () => {
         />
         <button type="button" onClick={(event) => handleEventclick(event)}>
           Click Me!
-        </button>
+        </button> */}
       </header>
     </div>
   );
